@@ -31,7 +31,7 @@ class FlappyBird: Emitter {
     
     func reduce_fly() {
         print("reduce fly")
-        self.speed.dy = 40
+        self.speed.dy = 30
     }
     
     func drop( dur: CGFloat ){
@@ -55,7 +55,7 @@ class FlappyBird: Emitter {
     func reduce_speed( dur: CGFloat ) -> CGFloat {
         
         let a:CGFloat = -10
-        let k:CGFloat = 16
+        let k:CGFloat = 10
         let t:CGFloat = dur * k
         
         let s = self.speed
