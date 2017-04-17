@@ -5,11 +5,6 @@
 //
 
 
-enum ActionType {
-    case Start, Pause, Gameover
-    case Fly
-}
-
 class Dispacher {
     
     var actions: [Emitter] = []

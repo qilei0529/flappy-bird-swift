@@ -6,6 +6,11 @@
 import SpriteKit
 
 
+enum ActionType {
+    case Start, Pause, Gameover, ReStart
+    case Fly
+}
+
 protocol Emitter {
     func reduce( action: ActionType)
 }
@@ -13,6 +18,7 @@ protocol Emitter {
 protocol BirdDelegate {
     func rise( to: CGFloat )
     func move( to: CGFloat )
+    func over()
 }
 
 class FlappyBird: Emitter {
@@ -26,15 +32,14 @@ class FlappyBird: Emitter {
     
     func start() {
         self.high = 100
-        
+        self.imp = 5
         self.delegate?.move( to:high )
     }
     
-    func reduce_fly() {
-        print("reduce fly")
-        self.speed.dy = 100
-        self.imp = 10
+    func over() {
+        self.delegate?.over()
     }
+    
     
     func drop( dur: CGFloat ){
         
@@ -58,7 +63,12 @@ class FlappyBird: Emitter {
             self.delegate?.rise(to: rot)
         }
         
-        
+    }
+    
+    func reduce_fly() {
+        print("reduce fly")
+        self.speed.dy = 100
+        self.imp = 10
     }
     
     func reduce_rotate( dur: CGFloat ) -> CGFloat {
@@ -66,7 +76,13 @@ class FlappyBird: Emitter {
         var rot: CGFloat = 0
         
         var p = self.imp
-    
+        
+        p -= dur * 14
+        
+        if ( p < 0 ) {
+            p = 0
+        }
+        
         if p > 7 {
             rot = 30
         } else if ( p > 5 ) {
@@ -75,11 +91,6 @@ class FlappyBird: Emitter {
             rot = 90 * ( p - 2) / 2
         }
         
-        p -= dur * 14
-        
-        if ( p < 0 ) {
-            p = 0
-        }
         
         self.imp = p
         return rot
@@ -133,7 +144,7 @@ class FlappyBirdGame: Emitter {
     
     
     enum GameStatus {
-        case Start , Pause , Gaming
+        case Start , Pause , Gaming , Over
     }
     var speed: CGFloat = 4
     
@@ -181,7 +192,19 @@ class FlappyBirdGame: Emitter {
     /// 游戏结束
     func gameover() {
         print("game over")
-        self.scene.scene_machine?.transition(to: SettingScene.self )
+        
+        self.scene.input_layer.hide()
+        self.scene.over_layer.show()
+        
+        self.bird.over()
+        
+        self.status = .Over
+        
+    }
+    
+    /// 重新开始
+    func restart() {
+        self.scene.scene_machine?.transition(to: HomeScene.self )
     }
     
     /// 时间更新
@@ -209,6 +232,8 @@ class FlappyBirdGame: Emitter {
             self.pause()
         case .Gameover:
             self.gameover()
+        case .ReStart:
+            self.restart()
         default: break
         }
     }

@@ -17,12 +17,16 @@ class HomeScene: BaseScene {
     
     lazy var input_layer: InputLayer = InputLayer( scene: self )
     
+    lazy var over_layer: OverLayer = OverLayer( scene: self )
+    
     override func render() {
         self.backgroundColor = .gray
         self.start_layer.render()
         self.world_layer.render()
         self.input_layer.render()
+        self.over_layer.render()
         self.input_layer.hide()
+        self.over_layer.hide()
         
     }
     

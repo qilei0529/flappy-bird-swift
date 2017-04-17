@@ -54,6 +54,13 @@ class BirdView: SKNode , BirdDelegate {
         
     }
     
+    func over() {
+        
+        let t = [self.textures[0]]
+        let c = SKAction.animate(with: t, timePerFrame: 0.16, resize: false, restore: false)
+        self.box.run(c, withKey: "action")
+    }
+    
     func move( to high: CGFloat ) {
         
         let mid = MID(self.scene_size)
