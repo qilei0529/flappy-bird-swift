@@ -13,6 +13,9 @@ class BirdView: SKNode , BirdDelegate {
     
     var scene_size: CGSize = SIZE(0,0)
     
+    var high: CGFloat = 0
+    var rotate: CGFloat = 0
+    
     override init() {
         super.init()
         self.render()
@@ -37,7 +40,17 @@ class BirdView: SKNode , BirdDelegate {
         self.box.run(r, withKey: "action")
     }
     
-    func fly() {
+    func rise( to rotate: CGFloat ) {
+        // 1 ~ -1
+        
+        let r = round_move( rotate )
+        
+        if ( self.rotate != r) {
+            self.rotate = r
+            let PI: CGFloat = 3.14
+            let rot = r * PI / 180
+            self.box.zRotation = rot
+        }
         
     }
     
@@ -45,9 +58,17 @@ class BirdView: SKNode , BirdDelegate {
         
         let mid = MID(self.scene_size)
         let y = round_move( high / 100 * mid.y)
-        self.position = POS(mid.x, 75 + y )
+        
+        let h = 75 + y
+        
+        if ( h !=  self.high) {
+            self.high = h
+            print(h)
+            self.position = POS(mid.x, h )
+        }
         
     }
+    
     
     func round_move( _ num: CGFloat) -> CGFloat {
         let n = Int(num)
