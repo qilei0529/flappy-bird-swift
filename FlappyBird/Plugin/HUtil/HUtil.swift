@@ -62,3 +62,12 @@ func MID( _ size:CGSize) -> CGPoint {
     return CGPoint(x: size.width / 2, y: size.height / 2)
 }
 
+
+// ROUND CGFLOAT
+func ROUND( _ num: CGFloat) -> CGFloat {
+    let n = Int(num)
+    let m = Int(num + 0.5)
+    let res:CGFloat = m > n ? CGFloat(n) + 0.5 : CGFloat(n)
+    return res
+}
+

@@ -70,7 +70,6 @@ class BirdView: SKNode , BirdDelegate {
         
         if ( h !=  self.high) {
             self.high = h
-            print(h)
             self.position = POS(mid.x, h )
         }
         

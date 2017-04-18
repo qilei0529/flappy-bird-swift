@@ -68,7 +68,7 @@ class FlappyBird: Emitter {
     func reduce_fly() {
         print("reduce fly")
         self.speed.dy = 100
-        self.imp = 10
+        self.imp = 12
     }
     
     func reduce_rotate( dur: CGFloat ) -> CGFloat {
@@ -83,12 +83,16 @@ class FlappyBird: Emitter {
             p = 0
         }
         
-        if p > 7 {
+        let MAX_A:CGFloat = 9
+        let MAX_B:CGFloat = 7
+        let MAX_C:CGFloat = 2
+        
+        if p > MAX_A {
             rot = 30
-        } else if ( p > 5 ) {
-            rot = 30 * ( p - 5 ) / 5
-        } else if ( p < 2) {
-            rot = 90 * ( p - 2) / 2
+        } else if ( p > MAX_B ) {
+            rot = 30 * ( p - MAX_B ) / (MAX_A - MAX_B)
+        } else if ( p < MAX_C) {
+            rot = 90 * ( p - MAX_C) / MAX_C
         }
         
         
@@ -139,22 +143,40 @@ class FlappyBird: Emitter {
     }
 }
 
+// 管道
+class FlappyPipe {
+    
+    struct PipeBox {
+        
+    }
+    
+    func start() {
+        
+    }
+    
+    func move( to num: CGFloat) {
+        print("pipe move:", ROUND(num) )
+    }
+}
 
 class FlappyBirdGame: Emitter {
-    
     
     enum GameStatus {
         case Start , Pause , Gaming , Over
     }
+    
+    // 前进的速度
     var speed: CGFloat = 4
-    
+    // 移动的总路程
     var total: CGFloat = 0
-    
+    // 状态
     var status: GameStatus = .Start
     
     var scene: HomeScene
     var time: TimeMachine = TimeMachine()
     var bird: FlappyBird = FlappyBird()
+    
+    var pipe: FlappyPipe = FlappyPipe()
     
     init( scene: HomeScene ) {
         self.scene = scene
@@ -170,6 +192,8 @@ class FlappyBirdGame: Emitter {
         self.status = .Start
         
         self.bird.start()
+        
+        self.pipe.start()
     }
     
     /// 游戏开始
@@ -218,6 +242,7 @@ class FlappyBirdGame: Emitter {
         if status == .Gaming {
             let v = CGFloat(dur)
             self.bird.drop( dur: v )
+            self.pipe.move( to: total )
         }
         
     }
