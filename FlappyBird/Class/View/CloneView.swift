@@ -121,16 +121,9 @@ class CloneView: SKNode {
     
     func move ( on len: CGFloat , speed: CGFloat = 1 ) {
         let p = self.position
-        let x = round_move(len * speed )
+        let x = ROUND(len * speed )
         let pos = POS( -x , p.y )
         self.move(to: pos)
-    }
-    
-    func round_move( _ num: CGFloat) -> CGFloat {
-        let n = Int(num)
-        let m = Int(num + 0.5)
-        let res:CGFloat = m > n ? CGFloat(n) + 0.5 : CGFloat(n)
-        return res
     }
     
 }

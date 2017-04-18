@@ -43,7 +43,7 @@ class BirdView: SKNode , BirdDelegate {
     func rise( to rotate: CGFloat ) {
         // 1 ~ -1
         
-        let r = round_move( rotate )
+        let r = ROUND( rotate )
         
         if ( self.rotate != r) {
             self.rotate = r
@@ -64,7 +64,7 @@ class BirdView: SKNode , BirdDelegate {
     func move( to high: CGFloat ) {
         
         let mid = MID(self.scene_size)
-        let y = round_move( high / 100 * mid.y)
+        let y = ROUND( high / 100 * mid.y)
         
         let h = 75 + y
         
@@ -75,13 +75,6 @@ class BirdView: SKNode , BirdDelegate {
         
     }
     
-    
-    func round_move( _ num: CGFloat) -> CGFloat {
-        let n = Int(num)
-        let m = Int(num + 0.5)
-        let res:CGFloat = m > n ? CGFloat(n) + 0.5 : CGFloat(n)
-        return res
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

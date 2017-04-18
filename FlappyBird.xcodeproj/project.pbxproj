@@ -24,6 +24,8 @@
 		BF8702601E9BB1BF0012F5EF /* CloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF87025F1E9BB1BF0012F5EF /* CloneView.swift */; };
 		BF8702621E9BD3710012F5EF /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8702611E9BD3710012F5EF /* BirdView.swift */; };
 		BF8702641E9BE1D30012F5EF /* TimeMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8702631E9BE1D30012F5EF /* TimeMachine.swift */; };
+		BFD720861EA6737E00E6A375 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD720851EA6737E00E6A375 /* Bird.swift */; };
+		BFD720881EA673C500E6A375 /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD720871EA673C500E6A375 /* Pipe.swift */; };
 		BFDCB2611EA5265700DD2FC7 /* OverLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDCB2601EA5265700DD2FC7 /* OverLayer.swift */; };
 		BFF563DA1E9FC4D700AE4397 /* InputLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF563D91E9FC4D700AE4397 /* InputLayer.swift */; };
 		BFFBB8B11E9BE4CF006E01D0 /* WordLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFBB8B01E9BE4CF006E01D0 /* WordLayer.swift */; };
@@ -49,6 +51,8 @@
 		BF87025F1E9BB1BF0012F5EF /* CloneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		BF8702611E9BD3710012F5EF /* BirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirdView.swift; sourceTree = "<group>"; };
 		BF8702631E9BE1D30012F5EF /* TimeMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMachine.swift; sourceTree = "<group>"; };
+		BFD720851EA6737E00E6A375 /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
+		BFD720871EA673C500E6A375 /* Pipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipe.swift; sourceTree = "<group>"; };
 		BFDCB2601EA5265700DD2FC7 /* OverLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverLayer.swift; sourceTree = "<group>"; };
 		BFF563D91E9FC4D700AE4397 /* InputLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputLayer.swift; sourceTree = "<group>"; };
 		BFFBB8B01E9BE4CF006E01D0 /* WordLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLayer.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			children = (
 				BF0DE7C41E9A96790039C59E /* Store.swift */,
 				BF8702631E9BE1D30012F5EF /* TimeMachine.swift */,
+				BFD720851EA6737E00E6A375 /* Bird.swift */,
+				BFD720871EA673C500E6A375 /* Pipe.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,11 +294,13 @@
 				BF0DE7DD1E9A96790039C59E /* HUtil.swift in Sources */,
 				BF8702641E9BE1D30012F5EF /* TimeMachine.swift in Sources */,
 				BFF563DA1E9FC4D700AE4397 /* InputLayer.swift in Sources */,
+				BFD720861EA6737E00E6A375 /* Bird.swift in Sources */,
 				BF0DE7DC1E9A96790039C59E /* HSceneBase.swift in Sources */,
 				BF0DE7DA1E9A96790039C59E /* GameViewController.swift in Sources */,
 				BF0DE7D81E9A96790039C59E /* HomeScene.swift in Sources */,
 				BF0DE7D41E9A96790039C59E /* Dispacher.swift in Sources */,
 				BF0DE7DB1E9A96790039C59E /* HButton.swift in Sources */,
+				BFD720881EA673C500E6A375 /* Pipe.swift in Sources */,
 				BF8702601E9BB1BF0012F5EF /* CloneView.swift in Sources */,
 				BF0DE7D51E9A96790039C59E /* StartLayer.swift in Sources */,
 			);
