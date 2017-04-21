@@ -76,6 +76,6 @@ class StartLayer: Layer {
         self.node.position = MID(self.scene.size)
         self.node.zPosition = 10
         self.node.addChild(btn_start)
-        self.node.addChild(btn_pause)
+//        self.node.addChild(btn_pause)
     }
 }

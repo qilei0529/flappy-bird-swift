@@ -69,6 +69,14 @@ class WorldLayer: Layer {
         return b
     }()
     
+    lazy var pipe: GodView = {
+        let b = GodView()
+            b.scene_size = self.size
+            b.zPosition = 10
+            b.render()
+        return b
+    }()
+    
     override func render() {
         super.render()
         self.node.zPosition = 1
@@ -81,6 +89,8 @@ class WorldLayer: Layer {
         self.node.addChild(root)
         
         self.node.addChild(bird)
+        
+        self.node.addChild(pipe)
         
     }
     

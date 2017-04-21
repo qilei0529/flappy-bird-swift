@@ -44,6 +44,7 @@ class FlappyBirdGame: Emitter {
         dispacher.bind(action: self)
         dispacher.bind(action: bird)
         self.bird.delegate = self.scene.world_layer.bird
+        self.pipe.delegate = self.scene.world_layer.pipe
         
         // move
         self.status = .Start
@@ -98,7 +99,8 @@ class FlappyBirdGame: Emitter {
         if status == .Gaming {
             let v = CGFloat(dur)
             self.bird.drop( dur: v )
-            self.pipe.move( dur: v )
+            let step = v * self.speed
+            self.pipe.move( step: step )
         }
         
     }

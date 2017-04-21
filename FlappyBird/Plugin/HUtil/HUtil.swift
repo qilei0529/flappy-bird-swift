@@ -71,3 +71,9 @@ func ROUND( _ num: CGFloat) -> CGFloat {
     return res
 }
 
+
+
+func RAND()-> Int {
+    return Int(arc4random()%1000)
+}
+

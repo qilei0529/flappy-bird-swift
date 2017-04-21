@@ -37,9 +37,11 @@ class FlappyBird: Emitter {
         
         self.high += d
         
-        if self.high > 160 {
+        let TOP:CGFloat = 170
+        
+        if self.high > TOP {
             self.speed.dy = 0
-            self.high = 160
+            self.high = TOP
         }
         
         if self.high < 0 {
@@ -106,7 +108,7 @@ class FlappyBird: Emitter {
         let t:CGFloat = dur
         
         // 速度增量
-        let vv = a * t * 0.5
+        let vv = a * t * 0.6
         
         // 最终速度
         var v = s.dy + vv
