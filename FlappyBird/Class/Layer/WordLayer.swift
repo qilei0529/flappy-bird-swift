@@ -19,7 +19,7 @@ class WorldLayer: Layer {
         let s = SIZE(self.size.width, 100)
         let b = CloneView(name: "root", size: s)
         b.position = POS(0, 0)
-        b.zPosition = 5
+        b.zPosition = 10
         return b
     }()
     
@@ -72,7 +72,7 @@ class WorldLayer: Layer {
     lazy var pipe: GodView = {
         let b = GodView()
             b.scene_size = self.size
-            b.zPosition = 10
+            b.zPosition = 5
             b.render()
         return b
     }()

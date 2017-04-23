@@ -7,60 +7,21 @@ import SpriteKit
 
 
 protocol PipeDelegate {
-    func add( node:SKNode )
+    
+    func create( pipe: Pipe )
+    
     func move( to: CGFloat )
     func over()
+    
+    func remove( index: Int )
 }
 
-
-class GodView: SKNode , PipeDelegate {
-    var scene_size: CGSize = SIZE(0,0)
-    
-    lazy var box: SKSpriteNode = {
-        let b = SKSpriteNode(color: RGBA(20, 0, 0, 0.5), size: SIZE(600, 100))
-        let m = MID(self.scene_size)
-            b.anchorPoint = POS(0, 0)
-            b.position = POS( m.x - 50, 60 )
-        return b
-    }()
-    
-    func move(to point: CGFloat) {
-        
-        let x = ROUND( -point * 10 )
-        let p = self.position;
-        if ( x != p.x) {
-            self.position = POS(x, p.y)
-        }
-        
-    }
-    
-    func over() {
-        
-    }
-    
-    func add( node: SKNode ) {
-        self.addChild(node)
-    }
-    
-    func render() {
-//        self.addChild(self.box)
-    }
+struct Pipe {
+    var gap : CGFloat
+    var high: CGFloat
+    var loc : CGFloat
 }
 
-
-class PipeView: SKNode {
-    
-    lazy var box: SKSpriteNode = {
-        let b = SKSpriteNode(color: RGBA(20, 100, 0, 0.8), size: SIZE(60, 200))
-        b.anchorPoint = POS(0.5, 0)
-        return b
-    }()
-    
-    func render() {
-        self.addChild(self.box)
-    }
-    
-}
 
 // 管道
 class FlappyPipe {
@@ -71,15 +32,12 @@ class FlappyPipe {
     
     var step: CGFloat = 200
     
+    var last_high: CGFloat = 50
     
-    struct Pipe {
-        var gap : CGFloat
-        var high: CGFloat
-        var loc : CGFloat
-        var node: PipeView
-    }
     
     var pipe_stack: [Pipe] = []
+    
+    var pipe_stash: [Pipe] = []
     
     var delegate: PipeDelegate?
     
@@ -93,27 +51,43 @@ class FlappyPipe {
     
     // 新建
     func create() {
-        let high:CGFloat = ROUND(CGFloat(RAND()) / 10)
-//        print(high)
+        
+        let rand:CGFloat = ROUND(CGFloat(RAND()) / 10) // 0 ~ 100
+        let len:CGFloat = 50
+        let max:CGFloat = 70
+        let min:CGFloat = 30
+        
+        let move = rand - len   // -50 ~ 50
+        
+        var high = 50 + move
+        
+        if high > max {
+            high = max - (high - max)
+        }else if high < min {
+            high = min - (high - min)
+        }
+        
+        print("create pipe" , move,  high , last_high)
         
         let loc:CGFloat = self.next + step
         
-        let box = PipeView()
-            box.render()
-            box.position = POS( loc,  60)
-        let pipe = Pipe(gap: 10, high: high, loc: loc, node: box)
-        self.pipe_stack.append(pipe)
+        let pipe = Pipe(gap: 8, high: high, loc: loc)
         
+        self.pipe_stack.append(pipe)
         self.next = loc
         
-        self.delegate?.add(node: box)
+        self.last_high = high
+        
+        self.delegate?.create(pipe: pipe)
+        
     }
 
     func check_create() {
+        
         let len = self.total * 10
         if ( len > self.next - self.step) {
-            self.create()
             
+            self.create()
             
             var clear = false
             
@@ -121,12 +95,12 @@ class FlappyPipe {
                 print(len , box.loc)
                 if len > box.loc + 300 {
                     clear = true
-                    box.node.removeFromParent()
                 }
             }
             
             if clear {
                 self.pipe_stack.removeFirst()
+                self.delegate?.remove(index: 0)
             }
             
         }
@@ -136,7 +110,6 @@ class FlappyPipe {
         self.total += step
         self.delegate?.move(to: self.total)
         
-//        print("move",self.total)
         self.check_create()
     }
 }
